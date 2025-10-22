@@ -1,0 +1,27 @@
+{
+  "name": "express",
+  "version": "1.0.0",
+  "description": "Primer servidor de node",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HaroldDVL/express_itssp.git"
+  },
+  "keywords": [
+    "node",
+    "API",
+    "ITSSP"
+  ],
+  "author": "Harold Nevarez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HaroldDVL/express_itssp/issues"
+  },
+  "homepage": "https://github.com/HaroldDVL/express_itssp#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
