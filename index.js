@@ -5,8 +5,17 @@ const port = process.env.PORT || 3000;
 const admin = require("firebase-admin");
 const cors = require("cors");
 
-// 🔹 Inicializar Firebase Admin usando variable de entorno
-const serviceAccount = JSON.parse(process.env.FIREBASE_KEY);
+// 🔹 Inicializar Firebase Admin
+let serviceAccount;
+
+if (process.env.FIREBASE_KEY) {
+  // Para Render: reemplaza los \n por saltos de línea reales
+  serviceAccount = JSON.parse(process.env.FIREBASE_KEY);
+  serviceAccount.private_key = serviceAccount.private_key.replace(/\\n/g, '\n');
+} else {
+  // Para local: usa el archivo físico
+  serviceAccount = require("./firebase_key.json");
+}
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
@@ -42,7 +51,6 @@ app.get("/productos", async (req, res) => {
       mensaje: "Bienvenido a nuestra tienda",
       productos
     });
-
   } catch (error) {
     console.error("Error al obtener productos:", error);
     res.status(500).json({ error: error.message });
