@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= titulo %></title>
+
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+
+  <style>
+body {
+  background: url('https://media1.tenor.com/m/1gfCwmVdMB8AAAAd/vaporwave.gif') no-repeat center center fixed;
+  background-size: cover; /* Esto hace que el GIF cubra toda la pantalla */
+  font-family: sans-serif;
+  color: #fff;
+}
+
+
+    .card {
+      background-color: rgba(0, 0, 0, 0.6);
+      color: #bcbcbc;
+    }
+
+    .btn-outline-light {
+      border-color: #fff;
+      color: #fff;
+    }
+  </style>
+</head>
+
+<body>
+<div class="container mt-5">
+  <!-- Botón para agregar producto -->
+  <div class="text-right mb-3">
+    <a href="/productos/add" class="btn btn-outline-light">➕ Agregar producto</a>
+  </div>
+
+  <h3 class="text-center mb-4"><%= mensaje %></h3>
+
+  <div class="row d-flex justify-content-center g-4">
+    <% if (productos.length === 0) { %>
+      <div class="col-12 text-center text-light">
+        <h5>No hay productos disponibles 😢</h5>
+        <a href="/productos/add" class="btn btn-primary mt-3">Agregar producto</a>
+      </div>
+    <% } else { %>
+      <% productos.forEach(producto => { %>
+        <div class="col-md-4">
+          <div class="card text-center shadow-sm">
+            <img src="<%= producto.imagen %>" class="card-img-top" alt="<%= producto.nombre %>">
+            <div class="card-body">
+              <h4 class="card-title"><%= producto.nombre %></h4>
+              <p style="color: #00FFFF;"><%= producto.descripcion %></p>
+              <h5 class="text-success">
+                $<%= Number(producto.costo || 0).toLocaleString() %>
+              </h5>
+              <button class="btn btn-success mt-2" onclick="mostrarMensaje()">Comprar</button>
+            </div>
+          </div>
+        </div>
+      <% }) %>
+    <% } %>
+  </div>
+</div>
+
+<script>
+function mostrarMensaje() {
+  document.body.innerHTML = `
+    <div style="
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: url('https://media.tenor.com/7iSNOPVJ0KsAAAAi/estrelas-brilhando.gif') repeat;
+      flex-direction: column;
+      font-family: sans-serif;
+      color: #fff;">
+      <h1 style="font-size: 3em; color: #28a745;">✅ Compra completada</h1>
+      <p>Gracias por tu compra</p>
+    </div>`;
+}
+</script>
+</body>
+</html>
